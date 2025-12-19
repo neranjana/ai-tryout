@@ -12,7 +12,7 @@ def main(): # Main function to interact with ChatGPT model
 
     load_dotenv() # Load environment variables, which has the OpenAI API KEY from .env file
     api_key = os.getenv("OPENAI_API_KEY") # Get OpenAI API key from environment variable
-    if not api_key:
+    if not api_key: # Check if the API key is not set
         print("Error: OPENAI_API_KEY environment variable not set.")
         print("Please set it by including it in the .env file or exporting it in your shell.")
         return
