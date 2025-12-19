@@ -12,20 +12,21 @@ def main(): # Main function to interact with Gemini model
     load_dotenv() # Load environment variables, which has the Gemini API KEY from .env file
     client = genai.Client() # Initialize the Gemini client
 
-    while True: 
+    while True: # Infinite loop to prompt the user for tne next question. Python does not have do-while loops.
         user_input = input("Say something to Gemini (or 'quit' to exit): ") # Get user input
         if user_input.lower() != "quit": # Check if the user does not want to quit
             try:
+                # Next, calling the Gemini model to generate a response
                 response = client.models.generate_content(
                     model="gemini-2.5-flash", contents=user_input
-                ) # Call the Gemini model to generate a response
+                )
                 
-                print(f"✅ Gemini said: {response.text}") # Print the response from Gemini
+                print(f"✅ Gemini said: {response.text}") # Print the response from Gemini. Green tick mark is just to indicate success
             except Exception as e: # Catch any exceptions that occur during the API call
-                print(f"❌ An error occurred: {e}") # Print the error message
-        else:
-            print("Exiting the conversation. Goodbye!") # Exit the conversation
-            break
+                print(f"❌ An error occurred: {e}") # Print the error message. Red cross mark is just to indicate failure
+        else: # User has entered 'quit' to exit the conversation
+            print("Exiting the conversation. Goodbye!") 
+            break # Break the infinite loop to exit the conversation
 
 
 
