@@ -21,6 +21,7 @@ def main(): # Main function to interact with ChatGPT model
     while True: # Infinite loop to prompt the user for tne next question. Python does not have do-while loops.
         user_input = input("Say something to ChatGPT (or 'quit' to exit): ") # Get user input
         if user_input.lower() != "quit": # Check if the user does not want to quit
+            print("Calling ChatGPT API... please wait.") # Inform the user that the API call is in progress
             try:
                 # Next, calling the OpenAI model to generate a response
                 response = client.chat.completions.create(

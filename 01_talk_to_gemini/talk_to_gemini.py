@@ -9,12 +9,17 @@ from dotenv import load_dotenv # Import load_dotenv to manage environment variab
 
 def main(): # Main function to interact with Gemini model
 
-    load_dotenv() # Load environment variables, which has the Gemini API KEY from .env file
-    client = genai.Client() # Initialize the Gemini client
+    load_dotenv() # Load values specified in .env file to environment variables
+    try: 
+        client = genai.Client() # Initialize the Gemini client. The GEMINI_API_KEY is read directly from environment variables by the client.
+    except Exception as e: # Catch any exceptions that occur during client initialization
+        print(f"❌ An error occurred while initializing the Gemini client: {e}") #
+        return # Exit the main function if client initialization fails. This will exit the program.
 
     while True: # Infinite loop to prompt the user for tne next question. Python does not have do-while loops.
         user_input = input("Say something to Gemini (or 'quit' to exit): ") # Get user input
         if user_input.lower() != "quit": # Check if the user does not want to quit
+            print("Calling Gemini API... please wait.") # Inform the user that the API call is in progress
             try:
                 # Next, calling the Gemini model to generate a response
                 response = client.models.generate_content(
